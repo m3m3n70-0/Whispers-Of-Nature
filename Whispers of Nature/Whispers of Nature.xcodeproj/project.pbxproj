@@ -1,0 +1,644 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F25567672BA8515A001DA145 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25567662BA85159001DA145 /* TimerView.swift */; };
+		F25567692BA86200001DA145 /* AudioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25567682BA86200001DA145 /* AudioViewModel.swift */; };
+		F266B7F12B8CB96500671BFA /* Whispers_of_NatureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F266B7F02B8CB96500671BFA /* Whispers_of_NatureApp.swift */; };
+		F266B7F32B8CB96500671BFA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F266B7F22B8CB96500671BFA /* ContentView.swift */; };
+		F266B7F52B8CB96700671BFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F266B7F42B8CB96700671BFA /* Assets.xcassets */; };
+		F266B7F82B8CB96700671BFA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F266B7F72B8CB96700671BFA /* Preview Assets.xcassets */; };
+		F266B8022B8CB96700671BFA /* Whispers_of_NatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F266B8012B8CB96700671BFA /* Whispers_of_NatureTests.swift */; };
+		F266B80C2B8CB96700671BFA /* Whispers_of_NatureUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F266B80B2B8CB96700671BFA /* Whispers_of_NatureUITests.swift */; };
+		F266B80E2B8CB96700671BFA /* Whispers_of_NatureUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F266B80D2B8CB96700671BFA /* Whispers_of_NatureUITestsLaunchTests.swift */; };
+		F266B81E2B8CC66A00671BFA /* fire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F266B81B2B8CC66A00671BFA /* fire.mp3 */; };
+		F266B81F2B8CC66A00671BFA /* trees.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F266B81C2B8CC66A00671BFA /* trees.mp3 */; };
+		F266B8202B8CC66A00671BFA /* waves.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F266B81D2B8CC66A00671BFA /* waves.mp3 */; };
+		F2750A682BE474FB00A9C348 /* MediaPlaybackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2750A672BE474FB00A9C348 /* MediaPlaybackManager.swift */; };
+		F29C45CA2BD735D4006214D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29C45C92BD735D4006214D1 /* AppDelegate.swift */; };
+		F2BCD1652B8F6EF8005458A2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCD1642B8F6EF8005458A2 /* SettingsView.swift */; };
+		F2F2FE752B95FEB9007EC581 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F2FE742B95FEB9007EC581 /* PopUp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F266B7FE2B8CB96700671BFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F266B7E52B8CB96500671BFA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F266B7EC2B8CB96500671BFA;
+			remoteInfo = "Whispers of Nature";
+		};
+		F266B8082B8CB96700671BFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F266B7E52B8CB96500671BFA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F266B7EC2B8CB96500671BFA;
+			remoteInfo = "Whispers of Nature";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F25567662BA85159001DA145 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		F25567682BA86200001DA145 /* AudioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioViewModel.swift; sourceTree = "<group>"; };
+		F266B7ED2B8CB96500671BFA /* Whispers of Nature.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Whispers of Nature.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F266B7F02B8CB96500671BFA /* Whispers_of_NatureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Whispers_of_NatureApp.swift; sourceTree = "<group>"; };
+		F266B7F22B8CB96500671BFA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F266B7F42B8CB96700671BFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F266B7F72B8CB96700671BFA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F266B7FD2B8CB96700671BFA /* Whispers of NatureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Whispers of NatureTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F266B8012B8CB96700671BFA /* Whispers_of_NatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Whispers_of_NatureTests.swift; sourceTree = "<group>"; };
+		F266B8072B8CB96700671BFA /* Whispers of NatureUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Whispers of NatureUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F266B80B2B8CB96700671BFA /* Whispers_of_NatureUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Whispers_of_NatureUITests.swift; sourceTree = "<group>"; };
+		F266B80D2B8CB96700671BFA /* Whispers_of_NatureUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Whispers_of_NatureUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F266B81B2B8CC66A00671BFA /* fire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fire.mp3; sourceTree = "<group>"; };
+		F266B81C2B8CC66A00671BFA /* trees.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = trees.mp3; sourceTree = "<group>"; };
+		F266B81D2B8CC66A00671BFA /* waves.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = waves.mp3; sourceTree = "<group>"; };
+		F2750A672BE474FB00A9C348 /* MediaPlaybackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlaybackManager.swift; sourceTree = "<group>"; };
+		F29C45C92BD735D4006214D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F29C45CD2BDAA0CF006214D1 /* Whispers-of-Nature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Whispers-of-Nature-Info.plist"; sourceTree = SOURCE_ROOT; };
+		F2BCD1642B8F6EF8005458A2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		F2F2FE742B95FEB9007EC581 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F266B7EA2B8CB96500671BFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F266B7FA2B8CB96700671BFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F266B8042B8CB96700671BFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F266B7E42B8CB96500671BFA = {
+			isa = PBXGroup;
+			children = (
+				F266B81A2B8CC4EE00671BFA /* Resources */,
+				F266B7EF2B8CB96500671BFA /* Whispers of Nature */,
+				F266B8002B8CB96700671BFA /* Whispers of NatureTests */,
+				F266B80A2B8CB96700671BFA /* Whispers of NatureUITests */,
+				F266B7EE2B8CB96500671BFA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F266B7EE2B8CB96500671BFA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F266B7ED2B8CB96500671BFA /* Whispers of Nature.app */,
+				F266B7FD2B8CB96700671BFA /* Whispers of NatureTests.xctest */,
+				F266B8072B8CB96700671BFA /* Whispers of NatureUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F266B7EF2B8CB96500671BFA /* Whispers of Nature */ = {
+			isa = PBXGroup;
+			children = (
+				F29C45CD2BDAA0CF006214D1 /* Whispers-of-Nature-Info.plist */,
+				F266B7F02B8CB96500671BFA /* Whispers_of_NatureApp.swift */,
+				F266B7F22B8CB96500671BFA /* ContentView.swift */,
+				F266B7F42B8CB96700671BFA /* Assets.xcassets */,
+				F266B7F62B8CB96700671BFA /* Preview Content */,
+				F2BCD1642B8F6EF8005458A2 /* SettingsView.swift */,
+				F2F2FE742B95FEB9007EC581 /* PopUp.swift */,
+				F25567662BA85159001DA145 /* TimerView.swift */,
+				F25567682BA86200001DA145 /* AudioViewModel.swift */,
+				F29C45C92BD735D4006214D1 /* AppDelegate.swift */,
+				F2750A672BE474FB00A9C348 /* MediaPlaybackManager.swift */,
+			);
+			path = "Whispers of Nature";
+			sourceTree = "<group>";
+		};
+		F266B7F62B8CB96700671BFA /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				F266B7F72B8CB96700671BFA /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F266B8002B8CB96700671BFA /* Whispers of NatureTests */ = {
+			isa = PBXGroup;
+			children = (
+				F266B8012B8CB96700671BFA /* Whispers_of_NatureTests.swift */,
+			);
+			path = "Whispers of NatureTests";
+			sourceTree = "<group>";
+		};
+		F266B80A2B8CB96700671BFA /* Whispers of NatureUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F266B80B2B8CB96700671BFA /* Whispers_of_NatureUITests.swift */,
+				F266B80D2B8CB96700671BFA /* Whispers_of_NatureUITestsLaunchTests.swift */,
+			);
+			path = "Whispers of NatureUITests";
+			sourceTree = "<group>";
+		};
+		F266B81A2B8CC4EE00671BFA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F266B81B2B8CC66A00671BFA /* fire.mp3 */,
+				F266B81C2B8CC66A00671BFA /* trees.mp3 */,
+				F266B81D2B8CC66A00671BFA /* waves.mp3 */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F266B7EC2B8CB96500671BFA /* Whispers of Nature */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F266B8112B8CB96700671BFA /* Build configuration list for PBXNativeTarget "Whispers of Nature" */;
+			buildPhases = (
+				F266B7E92B8CB96500671BFA /* Sources */,
+				F266B7EA2B8CB96500671BFA /* Frameworks */,
+				F266B7EB2B8CB96500671BFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Whispers of Nature";
+			productName = "Whispers of Nature";
+			productReference = F266B7ED2B8CB96500671BFA /* Whispers of Nature.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F266B7FC2B8CB96700671BFA /* Whispers of NatureTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F266B8142B8CB96700671BFA /* Build configuration list for PBXNativeTarget "Whispers of NatureTests" */;
+			buildPhases = (
+				F266B7F92B8CB96700671BFA /* Sources */,
+				F266B7FA2B8CB96700671BFA /* Frameworks */,
+				F266B7FB2B8CB96700671BFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F266B7FF2B8CB96700671BFA /* PBXTargetDependency */,
+			);
+			name = "Whispers of NatureTests";
+			productName = "Whispers of NatureTests";
+			productReference = F266B7FD2B8CB96700671BFA /* Whispers of NatureTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F266B8062B8CB96700671BFA /* Whispers of NatureUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F266B8172B8CB96700671BFA /* Build configuration list for PBXNativeTarget "Whispers of NatureUITests" */;
+			buildPhases = (
+				F266B8032B8CB96700671BFA /* Sources */,
+				F266B8042B8CB96700671BFA /* Frameworks */,
+				F266B8052B8CB96700671BFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F266B8092B8CB96700671BFA /* PBXTargetDependency */,
+			);
+			name = "Whispers of NatureUITests";
+			productName = "Whispers of NatureUITests";
+			productReference = F266B8072B8CB96700671BFA /* Whispers of NatureUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F266B7E52B8CB96500671BFA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				KnownAssetTags = (
+					Test,
+				);
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					F266B7EC2B8CB96500671BFA = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					F266B7FC2B8CB96700671BFA = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = F266B7EC2B8CB96500671BFA;
+					};
+					F266B8062B8CB96700671BFA = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = F266B7EC2B8CB96500671BFA;
+					};
+				};
+			};
+			buildConfigurationList = F266B7E82B8CB96500671BFA /* Build configuration list for PBXProject "Whispers of Nature" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F266B7E42B8CB96500671BFA;
+			productRefGroup = F266B7EE2B8CB96500671BFA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F266B7EC2B8CB96500671BFA /* Whispers of Nature */,
+				F266B7FC2B8CB96700671BFA /* Whispers of NatureTests */,
+				F266B8062B8CB96700671BFA /* Whispers of NatureUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F266B7EB2B8CB96500671BFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F266B7F82B8CB96700671BFA /* Preview Assets.xcassets in Resources */,
+				F266B7F52B8CB96700671BFA /* Assets.xcassets in Resources */,
+				F266B8202B8CC66A00671BFA /* waves.mp3 in Resources */,
+				F266B81F2B8CC66A00671BFA /* trees.mp3 in Resources */,
+				F266B81E2B8CC66A00671BFA /* fire.mp3 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F266B7FB2B8CB96700671BFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F266B8052B8CB96700671BFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F266B7E92B8CB96500671BFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F25567672BA8515A001DA145 /* TimerView.swift in Sources */,
+				F25567692BA86200001DA145 /* AudioViewModel.swift in Sources */,
+				F2BCD1652B8F6EF8005458A2 /* SettingsView.swift in Sources */,
+				F266B7F32B8CB96500671BFA /* ContentView.swift in Sources */,
+				F29C45CA2BD735D4006214D1 /* AppDelegate.swift in Sources */,
+				F2F2FE752B95FEB9007EC581 /* PopUp.swift in Sources */,
+				F266B7F12B8CB96500671BFA /* Whispers_of_NatureApp.swift in Sources */,
+				F2750A682BE474FB00A9C348 /* MediaPlaybackManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F266B7F92B8CB96700671BFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F266B8022B8CB96700671BFA /* Whispers_of_NatureTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F266B8032B8CB96700671BFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F266B80C2B8CB96700671BFA /* Whispers_of_NatureUITests.swift in Sources */,
+				F266B80E2B8CB96700671BFA /* Whispers_of_NatureUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F266B7FF2B8CB96700671BFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F266B7EC2B8CB96500671BFA /* Whispers of Nature */;
+			targetProxy = F266B7FE2B8CB96700671BFA /* PBXContainerItemProxy */;
+		};
+		F266B8092B8CB96700671BFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F266B7EC2B8CB96500671BFA /* Whispers of Nature */;
+			targetProxy = F266B8082B8CB96700671BFA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F266B80F2B8CB96700671BFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F266B8102B8CB96700671BFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F266B8122B8CB96700671BFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Whispers of Nature/Preview Content\"";
+				DEVELOPMENT_TEAM = N5X5J58CR2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Whispers-of-Nature-Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "vaporwave-it.Whispers-of-Nature";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F266B8132B8CB96700671BFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Whispers of Nature/Preview Content\"";
+				DEVELOPMENT_TEAM = N5X5J58CR2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Whispers-of-Nature-Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "vaporwave-it.Whispers-of-Nature";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F266B8152B8CB96700671BFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "vaporwave-it.Whispers-of-NatureTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Whispers of Nature.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Whispers of Nature";
+			};
+			name = Debug;
+		};
+		F266B8162B8CB96700671BFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "vaporwave-it.Whispers-of-NatureTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Whispers of Nature.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Whispers of Nature";
+			};
+			name = Release;
+		};
+		F266B8182B8CB96700671BFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.vaporwave-it.Whispers-of-NatureUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Whispers of Nature";
+			};
+			name = Debug;
+		};
+		F266B8192B8CB96700671BFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.vaporwave-it.Whispers-of-NatureUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Whispers of Nature";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F266B7E82B8CB96500671BFA /* Build configuration list for PBXProject "Whispers of Nature" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F266B80F2B8CB96700671BFA /* Debug */,
+				F266B8102B8CB96700671BFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F266B8112B8CB96700671BFA /* Build configuration list for PBXNativeTarget "Whispers of Nature" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F266B8122B8CB96700671BFA /* Debug */,
+				F266B8132B8CB96700671BFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F266B8142B8CB96700671BFA /* Build configuration list for PBXNativeTarget "Whispers of NatureTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F266B8152B8CB96700671BFA /* Debug */,
+				F266B8162B8CB96700671BFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F266B8172B8CB96700671BFA /* Build configuration list for PBXNativeTarget "Whispers of NatureUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F266B8182B8CB96700671BFA /* Debug */,
+				F266B8192B8CB96700671BFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F266B7E52B8CB96500671BFA /* Project object */;
+}
