@@ -1,18 +1,51 @@
-//
-//  SettingsView.swift
-//  Whispers of Nature
-//
-//  Created by fsociety on 28/02/2024.
-//
-
 import SwiftUI
+import LocalAuthentication
 
 struct SettingsView: View {
-    var body: some View {
-        Text("Settings Page")
-    }
-}
+    @State private var isAuthenticated = false
+    @State private var authenticationError: Error?
 
-#Preview {
-    SettingsView()
+    var body: some View {
+        if isAuthenticated {
+            Text("Protected Content") // Replace with your protected content
+        } else {
+            VStack {
+                Button("Authenticate") {
+                    authenticateUser()
+                }
+                .padding()
+
+                if let error = authenticationError {
+                    Text("Authentication failed: \(error.localizedDescription)")
+                        .foregroundColor(.red)
+                        .padding()
+                }
+            }
+            .padding()
+        }
+    }
+
+    private func authenticateUser() {
+        let context = LAContext()
+        var error: NSError?
+
+        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "Access your secure data") { success, error in
+                DispatchQueue.main.async {
+                    handleAuthenticationResult(success, error: error)
+                }
+            }
+        } else {
+            authenticationError = error
+        }
+    }
+
+    private func handleAuthenticationResult(_ success: Bool, error: Error?) {
+        if success {
+            isAuthenticated = true
+            authenticationError = nil
+        } else {
+            authenticationError = error
+        }
+    }
 }
