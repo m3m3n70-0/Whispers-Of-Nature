@@ -1,10 +1,8 @@
 import SwiftUI
-import AVKit
 
 struct ContentView: View {
     @EnvironmentObject var audioVM: AudioViewModel
-
-    @State private var isPlaying = false
+    
     @State private var waveVolume: Double = 0.0
     @State private var treeVolume: Double = 0.0
     @State private var fireVolume: Double = 0.0
@@ -12,18 +10,16 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                
                 Button(action: {
-                    if isPlaying {
+                    if audioVM.isAudioPlaying {
                         audioVM.stopAllAudio()
                     } else {
                         audioVM.playAllAudios()
                     }
-                    isPlaying.toggle()
                 }) {
-                    Text(isPlaying ? "Stop All Audio" : "Play")
+                    Text(audioVM.isAudioPlaying ? "Stop All Audio" : "Play")
                         .padding()
-                        .background(isPlaying ? Color.red : Color.green)
+                        .background(audioVM.isAudioPlaying ? Color.red : Color.green)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                         .shadow(radius: 3)
@@ -32,8 +28,6 @@ struct ContentView: View {
                 volumeControl(sound: "Waves", volume: $waveVolume, color: .blue)
                 volumeControl(sound: "Trees", volume: $treeVolume, color: .green)
                 volumeControl(sound: "Fire", volume: $fireVolume, color: .orange)
-
-                // Navigation links to other views
                 navigationLinks()
 
                 Spacer()
@@ -42,6 +36,7 @@ struct ContentView: View {
         }
     }
 
+    @ViewBuilder
     func volumeControl(sound: String, volume: Binding<Double>, color: Color) -> some View {
         VStack {
             Text(sound)
