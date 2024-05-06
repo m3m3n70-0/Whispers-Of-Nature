@@ -19,7 +19,7 @@
 		F266B81E2B8CC66A00671BFA /* fire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F266B81B2B8CC66A00671BFA /* fire.mp3 */; };
 		F266B81F2B8CC66A00671BFA /* trees.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F266B81C2B8CC66A00671BFA /* trees.mp3 */; };
 		F266B8202B8CC66A00671BFA /* waves.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F266B81D2B8CC66A00671BFA /* waves.mp3 */; };
-		F2750A682BE474FB00A9C348 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2750A672BE474FB00A9C348 /* PasswordView.swift */; };
+		F2750A6A2BE8479500A9C348 /* PresetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2750A692BE8479500A9C348 /* PresetView.swift */; };
 		F29C45CA2BD735D4006214D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29C45C92BD735D4006214D1 /* AppDelegate.swift */; };
 		F2BCD1652B8F6EF8005458A2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCD1642B8F6EF8005458A2 /* SettingsView.swift */; };
 		F2F2FE752B95FEB9007EC581 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F2FE742B95FEB9007EC581 /* PopUp.swift */; };
@@ -58,7 +58,7 @@
 		F266B81B2B8CC66A00671BFA /* fire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fire.mp3; sourceTree = "<group>"; };
 		F266B81C2B8CC66A00671BFA /* trees.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = trees.mp3; sourceTree = "<group>"; };
 		F266B81D2B8CC66A00671BFA /* waves.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = waves.mp3; sourceTree = "<group>"; };
-		F2750A672BE474FB00A9C348 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
+		F2750A692BE8479500A9C348 /* PresetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetView.swift; sourceTree = "<group>"; };
 		F29C45C92BD735D4006214D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F29C45CD2BDAA0CF006214D1 /* Whispers-of-Nature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Whispers-of-Nature-Info.plist"; sourceTree = SOURCE_ROOT; };
 		F2BCD1642B8F6EF8005458A2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 				F25567662BA85159001DA145 /* TimerView.swift */,
 				F25567682BA86200001DA145 /* AudioViewModel.swift */,
 				F29C45C92BD735D4006214D1 /* AppDelegate.swift */,
-				F2750A672BE474FB00A9C348 /* PasswordView.swift */,
+				F2750A692BE8479500A9C348 /* PresetView.swift */,
 			);
 			path = "Whispers of Nature";
 			sourceTree = "<group>";
@@ -301,13 +301,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F25567672BA8515A001DA145 /* TimerView.swift in Sources */,
+				F2750A6A2BE8479500A9C348 /* PresetView.swift in Sources */,
 				F25567692BA86200001DA145 /* AudioViewModel.swift in Sources */,
 				F2BCD1652B8F6EF8005458A2 /* SettingsView.swift in Sources */,
 				F266B7F32B8CB96500671BFA /* ContentView.swift in Sources */,
 				F29C45CA2BD735D4006214D1 /* AppDelegate.swift in Sources */,
 				F2F2FE752B95FEB9007EC581 /* PopUp.swift in Sources */,
 				F266B7F12B8CB96500671BFA /* Whispers_of_NatureApp.swift in Sources */,
-				F2750A682BE474FB00A9C348 /* PasswordView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

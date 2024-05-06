@@ -4,6 +4,7 @@ import AVKit
 struct ContentView: View {
     @EnvironmentObject var audioVM: AudioViewModel
 
+    @State private var isPlaying = false
     @State private var waveVolume: Double = 0.0
     @State private var treeVolume: Double = 0.0
     @State private var fireVolume: Double = 0.0
@@ -11,27 +12,26 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Button("Play") {
-                    audioVM.playAllAudios()
+                
+                Button(action: {
+                    if isPlaying {
+                        audioVM.stopAllAudio()
+                    } else {
+                        audioVM.playAllAudios()
+                    }
+                    isPlaying.toggle()
+                }) {
+                    Text(isPlaying ? "Stop All Audio" : "Play")
+                        .padding()
+                        .background(isPlaying ? Color.red : Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .shadow(radius: 3)
                 }
-                .padding()
-                .background(Color.green)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .shadow(radius: 3)
 
                 volumeControl(sound: "Waves", volume: $waveVolume, color: .blue)
                 volumeControl(sound: "Trees", volume: $treeVolume, color: .green)
                 volumeControl(sound: "Fire", volume: $fireVolume, color: .orange)
-
-                Button("Stop All Audio") {
-                    audioVM.stopAllAudio()
-                }
-                .padding()
-                .background(Color.red)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .shadow(radius: 3)
 
                 // Navigation links to other views
                 navigationLinks()
@@ -84,6 +84,16 @@ struct ContentView: View {
                 .cornerRadius(10)
                 .shadow(radius: 2)
         }
+        
+        NavigationLink(destination: PresetsView()) {
+            Text("Presets")
+                .padding()
+                .background(Color.gray)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+                .shadow(radius: 2)
+        }
+        
         NavigationLink(destination: TimerView()) {
             Text("Timer")
                 .padding()
