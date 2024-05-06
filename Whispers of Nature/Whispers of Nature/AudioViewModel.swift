@@ -4,8 +4,29 @@ import MediaPlayer
 import UIKit
 
 class AudioViewModel: ObservableObject {
-    static let shared = AudioViewModel() // Singleton instance
+    static let shared = AudioViewModel() // Singleton instance for easy global access
+    @Published var editingPresetId: UUID? // Add this to manage editing state
+
+
     @Published var isAudioPlaying = false
+    @Published var waveVolume: Float = 0.0 {
+        didSet {
+            wavePlayer?.volume = waveVolume
+            print("Updated wave volume to \(waveVolume)")
+        }
+    }
+    @Published var treeVolume: Float = 0.0 {
+        didSet {
+            treePlayer?.volume = treeVolume
+            print("Updated tree volume to \(treeVolume)")
+        }
+    }
+    @Published var fireVolume: Float = 0.0 {
+        didSet {
+            firePlayer?.volume = fireVolume
+            print("Updated fire volume to \(fireVolume)")
+        }
+    }
     
     private var wavePlayer: AVAudioPlayer?
     private var treePlayer: AVAudioPlayer?
@@ -15,6 +36,13 @@ class AudioViewModel: ObservableObject {
 
     init() {
         setupRemoteCommandCenter()
+        initializePlayers()
+    }
+
+    private func initializePlayers() {
+        wavePlayer = createPlayer(sound: "waves", volume: lastVolumes["waves"] ?? 0.5)
+        treePlayer = createPlayer(sound: "trees", volume: lastVolumes["trees"] ?? 0.5)
+        firePlayer = createPlayer(sound: "fire", volume: lastVolumes["fire"] ?? 0.5)
     }
 
     private func createPlayer(sound: String, volume: Float) -> AVAudioPlayer? {
@@ -34,22 +62,19 @@ class AudioViewModel: ObservableObject {
     }
 
     func playAllAudios() {
+        print("Attempting to play all audios...")
         if !isAnyAudioPlaying() {
-            wavePlayer = createPlayer(sound: "waves", volume: lastVolumes["waves"] ?? 0.0)
-            treePlayer = createPlayer(sound: "trees", volume: lastVolumes["trees"] ?? 0.0)
-            firePlayer = createPlayer(sound: "fire", volume: lastVolumes["fire"] ?? 0.0)
-
             wavePlayer?.play()
             treePlayer?.play()
             firePlayer?.play()
             isAudioPlaying = true
-
             updateNowPlayingInfo(isPlaying: true)
             scheduleNotificationIfNeeded()
         }
     }
 
     func stopAllAudio() {
+        print("Stopping all audios...")
         [wavePlayer, treePlayer, firePlayer].forEach { $0?.stop() }
         isAudioPlaying = false
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
@@ -59,17 +84,12 @@ class AudioViewModel: ObservableObject {
         }
     }
 
-    func pauseAudio() {
-        [wavePlayer, treePlayer, firePlayer].forEach { $0?.pause() }
-        isAudioPlaying = false
-        updateNowPlayingInfo(isPlaying: false)
-    }
-
     func isAnyAudioPlaying() -> Bool {
         return wavePlayer?.isPlaying ?? false || treePlayer?.isPlaying ?? false || firePlayer?.isPlaying ?? false
     }
 
     func setVolume(for sound: String, volume: Float) {
+        print("Setting volume for \(sound): \(volume)")
         switch sound {
         case "waves":
             lastVolumes["waves"] = volume
@@ -115,7 +135,7 @@ class AudioViewModel: ObservableObject {
 
         commandCenter.pauseCommand.isEnabled = true
         commandCenter.pauseCommand.addTarget { [weak self] event -> MPRemoteCommandHandlerStatus in
-            self?.pauseAudio()
+            self?.stopAllAudio()
             return .success
         }
 
