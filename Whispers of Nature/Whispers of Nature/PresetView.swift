@@ -29,10 +29,13 @@ class PresetManager {
     }
 }
 
+
 struct PresetsView: View {
     @EnvironmentObject var audioVM: AudioViewModel
     @State private var presets: [AudioPreset] = []
-    @State private var editingPresetId: UUID? // Keep track of which preset is being edited
+    @State private var editingPresetId: UUID?
+    @State private var showingNewPresetSheet = false
+    @State private var newPresetName = ""
 
     init() {
         _presets = State(initialValue: PresetManager.shared.loadPresets())
@@ -40,43 +43,47 @@ struct PresetsView: View {
 
     var body: some View {
         List {
-            ForEach($presets, id: \.id) { $preset in
+            ForEach(presets.indices, id: \.self) { index in
                 HStack {
-                    if editingPresetId == preset.id {
-                        // Directly use the binding to edit the name
-                        TextField("Enter Preset Name", text: $preset.name, onCommit: {
-                            // Commit changes and remove editing state
-                            editingPresetId = nil
+                    if editingPresetId == presets[index].id {
+                        TextField("Enter Preset Name", text: $presets[index].name) {
+                            presets[index].name = presets[index].name.trimmingCharacters(in: .whitespacesAndNewlines)
                             PresetManager.shared.savePresets(presets)
-                        })
+                            editingPresetId = nil
+                        }
                     } else {
-                        // Directly access preset properties without 'wrappedValue'
-                        Text(preset.name)
+                        Text(presets[index].name)
                     }
                     Spacer()
-                    if editingPresetId != preset.id {
-                        Button("Edit") {
-                            editingPresetId = preset.id
-                        }
+                    Button("Edit") {
+                        editingPresetId = presets[index].id
                     }
                     Button("Apply") {
-                        applyPreset(preset)
+                        applyPreset(presets[index])
                     }
                     Button("Delete") {
                         withAnimation {
-                            presets.removeAll { $0.id == preset.id }
+                            presets.remove(at: index)
                             PresetManager.shared.savePresets(presets)
                         }
                     }
                 }
             }
             Button("Add New Preset") {
-                addNewPreset()
+                showingNewPresetSheet = true
             }
         }
         .navigationBarTitle("Presets", displayMode: .inline)
         .onAppear {
             presets = PresetManager.shared.loadPresets()
+        }
+        .sheet(isPresented: $showingNewPresetSheet) {
+            NewPresetView(newPresetName: $newPresetName, onSave: {
+                addNewPreset(named: newPresetName)
+                showingNewPresetSheet = false
+            }, onCancel: {
+                showingNewPresetSheet = false
+            })
         }
     }
 
@@ -86,11 +93,35 @@ struct PresetsView: View {
         audioVM.fireVolume = preset.fireVolume
     }
 
-    private func addNewPreset() {
-        let newPreset = AudioPreset(name: "New Preset", waveVolume: audioVM.waveVolume, treeVolume: audioVM.treeVolume, fireVolume: audioVM.fireVolume)
+    private func addNewPreset(named name: String) {
+        let newPreset = AudioPreset(name: name, waveVolume: audioVM.waveVolume, treeVolume: audioVM.treeVolume, fireVolume: audioVM.fireVolume)
         presets.append(newPreset)
         PresetManager.shared.savePresets(presets)
     }
 }
 
-// Ensure to add AudioViewModel and any other necessary parts of your app setup as needed.
+struct NewPresetView: View {
+    @Binding var newPresetName: String
+    var onSave: () -> Void
+    var onCancel: () -> Void
+
+    var body: some View {
+        NavigationView {
+            Form {
+                TextField("Preset Name", text: $newPresetName)
+                Button("Save Preset") {
+                    onSave()
+                }
+            }
+            .navigationBarTitle("New Preset", displayMode: .inline)
+            .navigationBarItems(leading: Button("Cancel") {
+                onCancel()
+            })
+        }
+    }
+}
+
+
+
+
+
