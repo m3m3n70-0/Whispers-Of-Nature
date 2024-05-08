@@ -20,6 +20,7 @@
 		F266B81F2B8CC66A00671BFA /* trees.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F266B81C2B8CC66A00671BFA /* trees.mp3 */; };
 		F266B8202B8CC66A00671BFA /* waves.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F266B81D2B8CC66A00671BFA /* waves.mp3 */; };
 		F2750A6A2BE8479500A9C348 /* PresetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2750A692BE8479500A9C348 /* PresetView.swift */; };
+		F27643062BEBCF3B00DCD810 /* QRCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27643052BEBCF3B00DCD810 /* QRCodeScannerView.swift */; };
 		F29C45CA2BD735D4006214D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29C45C92BD735D4006214D1 /* AppDelegate.swift */; };
 		F2BCD1652B8F6EF8005458A2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCD1642B8F6EF8005458A2 /* SettingsView.swift */; };
 		F2F2FE752B95FEB9007EC581 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F2FE742B95FEB9007EC581 /* PopUp.swift */; };
@@ -59,6 +60,7 @@
 		F266B81C2B8CC66A00671BFA /* trees.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = trees.mp3; sourceTree = "<group>"; };
 		F266B81D2B8CC66A00671BFA /* waves.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = waves.mp3; sourceTree = "<group>"; };
 		F2750A692BE8479500A9C348 /* PresetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetView.swift; sourceTree = "<group>"; };
+		F27643052BEBCF3B00DCD810 /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
 		F29C45C92BD735D4006214D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F29C45CD2BDAA0CF006214D1 /* Whispers-of-Nature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Whispers-of-Nature-Info.plist"; sourceTree = SOURCE_ROOT; };
 		F2BCD1642B8F6EF8005458A2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				F25567682BA86200001DA145 /* AudioViewModel.swift */,
 				F29C45C92BD735D4006214D1 /* AppDelegate.swift */,
 				F2750A692BE8479500A9C348 /* PresetView.swift */,
+				F27643052BEBCF3B00DCD810 /* QRCodeScannerView.swift */,
 			);
 			path = "Whispers of Nature";
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				F25567692BA86200001DA145 /* AudioViewModel.swift in Sources */,
 				F2BCD1652B8F6EF8005458A2 /* SettingsView.swift in Sources */,
 				F266B7F32B8CB96500671BFA /* ContentView.swift in Sources */,
+				F27643062BEBCF3B00DCD810 /* QRCodeScannerView.swift in Sources */,
 				F29C45CA2BD735D4006214D1 /* AppDelegate.swift in Sources */,
 				F2F2FE752B95FEB9007EC581 /* PopUp.swift in Sources */,
 				F266B7F12B8CB96500671BFA /* Whispers_of_NatureApp.swift in Sources */,
@@ -476,6 +480,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Whispers-of-Nature-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need to acces the camera to scan qr codes for custom presets of audio";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need to authenticate users using biometric authentication to protect sensitive information.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -507,6 +513,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Whispers-of-Nature-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need to acces the camera to scan qr codes for custom presets of audio";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need to authenticate users using biometric authentication to protect sensitive information.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
