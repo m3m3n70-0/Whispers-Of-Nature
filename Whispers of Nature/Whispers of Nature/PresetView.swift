@@ -34,38 +34,43 @@ struct PresetsView: View {
     @State private var presets: [AudioPreset] = []
     @State private var editingPresetId: UUID?
     @State private var showingNewPresetSheet = false
-    @State private var showingEditPresetSheet = false
-    @State private var showingDeleteConfirmation = false
     @State private var newPresetName = ""
-    @State private var showAlert = false
+    @State private var showAlertType: AlertType?
     @State private var appliedPresetName = ""
-    @State private var presetToDelete: Int?
+    @State private var presetToDelete: AudioPreset?
 
     init() {
         _presets = State(initialValue: PresetManager.shared.loadPresets())
     }
 
     var body: some View {
-        VStack {
+        NavigationView {
             List {
                 ForEach(presets.indices, id: \.self) { index in
                     HStack {
-                        Text(presets[index].name)
-                            .onTapGesture {
-                                // Apply settings when tapping on the name
-                                applyPreset(presets[index])
-                            }
-                        Spacer()
-                        Button("Edit") {
-                            editingPresetId = presets[index].id
-                            newPresetName = presets[index].name
-                            showingEditPresetSheet = true
+                        if editingPresetId == presets[index].id {
+                            TextField("Enter Preset Name", text: $presets[index].name, onCommit: {
+                                // Save when commit editing
+                                editingPresetId = nil
+                                PresetManager.shared.savePresets(presets)
+                            })
+                        } else {
+                            Text(presets[index].name)
+                                .onTapGesture {
+                                    applyPreset(presets[index])
+                                }
                         }
-                        .buttonStyle(BorderlessButtonStyle()) // Ensures the button doesn't capture unwanted touches
+                        Spacer()
+                        if editingPresetId != presets[index].id {
+                            Button("Edit") {
+                                editingPresetId = presets[index].id
+                            }
+                            .buttonStyle(BorderlessButtonStyle()) // Ensures the button doesn't capture unwanted touches
+                        }
                         Spacer().frame(width: 10) // Add some space between buttons
                         Button("Delete") {
-                            presetToDelete = index
-                            showingDeleteConfirmation = true
+                            presetToDelete = presets[index]
+                            showAlertType = .delete
                         }
                         .buttonStyle(BorderlessButtonStyle()) // Ensures the button doesn't capture unwanted touches
                     }
@@ -79,40 +84,34 @@ struct PresetsView: View {
             .onAppear {
                 presets = PresetManager.shared.loadPresets()
             }
-        }
-        .sheet(isPresented: $showingNewPresetSheet) {
-            NewPresetView(newPresetName: $newPresetName, onSave: {
-                addNewPreset(named: newPresetName)
-                showingNewPresetSheet = false
-            }, onCancel: {
-                showingNewPresetSheet = false
-            })
-        }
-        .sheet(isPresented: $showingEditPresetSheet) {
-            EditPresetView(presetName: $newPresetName, onSave: {
-                if let index = presets.firstIndex(where: { $0.id == editingPresetId }) {
-                    presets[index].name = newPresetName
-                    PresetManager.shared.savePresets(presets)
+            .sheet(isPresented: $showingNewPresetSheet) {
+                NewPresetView(newPresetName: $newPresetName, onSave: {
+                    addNewPreset(named: newPresetName)
+                    showingNewPresetSheet = false
+                }, onCancel: {
+                    showingNewPresetSheet = false
+                })
+            }
+            .alert(item: $showAlertType) { alertType in
+                switch alertType {
+                case .apply:
+                    return Alert(title: Text("Preset Applied"), message: Text("Applied \(appliedPresetName)"), dismissButton: .default(Text("OK")))
+                case .delete:
+                    return Alert(
+                        title: Text("Delete Preset"),
+                        message: Text("Are you sure you want to delete this preset?"),
+                        primaryButton: .destructive(Text("Delete")) {
+                            if let preset = presetToDelete, let index = presets.firstIndex(where: { $0.id == preset.id }) {
+                                deletePreset(at: index)
+                            }
+                            presetToDelete = nil
+                        },
+                        secondaryButton: .cancel {
+                            presetToDelete = nil
+                        }
+                    )
                 }
-                showingEditPresetSheet = false
-            }, onCancel: {
-                showingEditPresetSheet = false
-            })
-        }
-        .alert(isPresented: $showAlert) {
-            Alert(title: Text("Preset Applied"), message: Text("Applied \(appliedPresetName)"), dismissButton: .default(Text("OK")))
-        }
-        .alert(isPresented: $showingDeleteConfirmation) {
-            Alert(
-                title: Text("Delete Preset"),
-                message: Text("Are you sure you want to delete this preset?"),
-                primaryButton: .destructive(Text("Delete")) {
-                    if let index = presetToDelete {
-                        deletePreset(at: index)
-                    }
-                },
-                secondaryButton: .cancel()
-            )
+            }
         }
     }
 
@@ -121,8 +120,7 @@ struct PresetsView: View {
         audioVM.treeVolume = preset.treeVolume
         audioVM.fireVolume = preset.fireVolume
         appliedPresetName = preset.name
-        showAlert = true
-        print("Preset applied: \(preset.name)")  // Debug print
+        showAlertType = .apply
     }
 
     private func addNewPreset(named name: String) {
@@ -159,23 +157,11 @@ struct NewPresetView: View {
     }
 }
 
-struct EditPresetView: View {
-    @Binding var presetName: String
-    var onSave: () -> Void
-    var onCancel: () -> Void
+enum AlertType: Identifiable {
+    case apply
+    case delete
 
-    var body: some View {
-        NavigationView {
-            Form {
-                TextField("Preset Name", text: $presetName)
-                Button("Save Changes") {
-                    onSave()
-                }
-            }
-            .navigationBarTitle("Edit Preset", displayMode: .inline)
-            .navigationBarItems(leading: Button("Cancel") {
-                onCancel()
-            })
-        }
+    var id: Int {
+        hashValue
     }
 }
