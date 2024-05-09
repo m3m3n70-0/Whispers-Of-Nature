@@ -1,12 +1,41 @@
 import SwiftUI
-import AVFoundation
 
 struct AudioPreset: Identifiable, Codable {
-    var id: UUID = UUID()
+    var id: UUID
     var name: String
     var waveVolume: Float
     var treeVolume: Float
     var fireVolume: Float
+    
+    // Custom initializer to provide a default value for `id`
+    init(id: UUID = UUID(), name: String, waveVolume: Float, treeVolume: Float, fireVolume: Float) {
+        self.id = id
+        self.name = name
+        self.waveVolume = waveVolume
+        self.treeVolume = treeVolume
+        self.fireVolume = fireVolume
+    }
+
+    // Coding keys to match the JSON keys
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case waveVolume
+        case treeVolume
+        case fireVolume
+    }
+
+    // Custom init from decoder to handle missing `id`
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decodeIfPresent(UUID.self, forKey: .id) ?? UUID()
+        self.name = try container.decode(String.self, forKey: .name)
+        self.waveVolume = try container.decode(Float.self, forKey: .waveVolume)
+        self.treeVolume = try container.decode(Float.self, forKey: .treeVolume)
+        self.fireVolume = try container.decode(Float.self, forKey: .fireVolume)
+    }
+
+    // Encode function is automatically synthesized
 }
 
 class PresetManager {
@@ -35,76 +64,6 @@ enum AlertType: Identifiable {
     var id: Int {
         hashValue
     }
-}
-
-struct QRCodeScannerView: UIViewControllerRepresentable {
-    class Coordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate {
-        var parent: QRCodeScannerView
-        
-        init(parent: QRCodeScannerView) {
-            self.parent = parent
-        }
-        
-        func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-            if let metadataObject = metadataObjects.first {
-                guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
-                guard let stringValue = readableObject.stringValue else { return }
-                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-                parent.didFindCode(stringValue)
-            }
-        }
-    }
-
-    var didFindCode: (String) -> Void
-    var didFail: (Error) -> Void
-
-    func makeCoordinator() -> Coordinator {
-        return Coordinator(parent: self)
-    }
-
-    func makeUIViewController(context: Context) -> UIViewController {
-        let viewController = UIViewController()
-        let captureSession = AVCaptureSession()
-
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return viewController }
-        let videoInput: AVCaptureDeviceInput
-
-        do {
-            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-        } catch {
-            didFail(error)
-            return viewController
-        }
-
-        if (captureSession.canAddInput(videoInput)) {
-            captureSession.addInput(videoInput)
-        } else {
-            didFail(NSError(domain: "QRCodeScannerView", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unable to add input"]))
-            return viewController
-        }
-
-        let metadataOutput = AVCaptureMetadataOutput()
-
-        if (captureSession.canAddOutput(metadataOutput)) {
-            captureSession.addOutput(metadataOutput)
-
-            metadataOutput.setMetadataObjectsDelegate(context.coordinator, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.qr]
-        } else {
-            didFail(NSError(domain: "QRCodeScannerView", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unable to add output"]))
-            return viewController
-        }
-
-        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = viewController.view.layer.bounds
-        previewLayer.videoGravity = .resizeAspectFill
-        viewController.view.layer.addSublayer(previewLayer)
-
-        captureSession.startRunning()
-        return viewController
-    }
-
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }
 
 struct PresetsView: View {
@@ -233,15 +192,20 @@ struct PresetsView: View {
     }
 
     private func handleScannedCode(_ code: String) {
+        print("Scanned code: \(code)") // Debug print to see the scanned code
         // Assuming the QR code contains JSON data for the preset
-        if let data = code.data(using: .utf8),
-           let preset = try? JSONDecoder().decode(AudioPreset.self, from: data) {
-            presets.append(preset)
-            PresetManager.shared.savePresets(presets)
-            showAlertType = .apply
-            appliedPresetName = preset.name
+        if let data = code.data(using: .utf8) {
+            do {
+                let preset = try JSONDecoder().decode(AudioPreset.self, from: data)
+                presets.append(preset)
+                PresetManager.shared.savePresets(presets)
+                showAlertType = .apply
+                appliedPresetName = preset.name
+            } catch {
+                print("Failed to decode preset from QR code: \(error)") // More detailed error message
+            }
         } else {
-            print("Failed to decode preset from QR code")
+            print("Failed to convert code to data")
         }
     }
 }
