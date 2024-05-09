@@ -21,6 +21,7 @@
 		F266B8202B8CC66A00671BFA /* waves.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F266B81D2B8CC66A00671BFA /* waves.mp3 */; };
 		F2750A6A2BE8479500A9C348 /* PresetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2750A692BE8479500A9C348 /* PresetView.swift */; };
 		F27643062BEBCF3B00DCD810 /* QRCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27643052BEBCF3B00DCD810 /* QRCodeScannerView.swift */; };
+		F27643082BEC5D0F00DCD810 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27643072BEC5D0F00DCD810 /* BackgroundView.swift */; };
 		F29C45CA2BD735D4006214D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29C45C92BD735D4006214D1 /* AppDelegate.swift */; };
 		F2BCD1652B8F6EF8005458A2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCD1642B8F6EF8005458A2 /* SettingsView.swift */; };
 		F2F2FE752B95FEB9007EC581 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F2FE742B95FEB9007EC581 /* PopUp.swift */; };
@@ -61,6 +62,7 @@
 		F266B81D2B8CC66A00671BFA /* waves.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = waves.mp3; sourceTree = "<group>"; };
 		F2750A692BE8479500A9C348 /* PresetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetView.swift; sourceTree = "<group>"; };
 		F27643052BEBCF3B00DCD810 /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
+		F27643072BEC5D0F00DCD810 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		F29C45C92BD735D4006214D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F29C45CD2BDAA0CF006214D1 /* Whispers-of-Nature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Whispers-of-Nature-Info.plist"; sourceTree = SOURCE_ROOT; };
 		F2BCD1642B8F6EF8005458A2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				F29C45CD2BDAA0CF006214D1 /* Whispers-of-Nature-Info.plist */,
 				F266B7F02B8CB96500671BFA /* Whispers_of_NatureApp.swift */,
 				F266B7F22B8CB96500671BFA /* ContentView.swift */,
+				F27643072BEC5D0F00DCD810 /* BackgroundView.swift */,
 				F266B7F42B8CB96700671BFA /* Assets.xcassets */,
 				F266B7F62B8CB96700671BFA /* Preview Content */,
 				F2BCD1642B8F6EF8005458A2 /* SettingsView.swift */,
@@ -303,6 +306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F27643082BEC5D0F00DCD810 /* BackgroundView.swift in Sources */,
 				F25567672BA8515A001DA145 /* TimerView.swift in Sources */,
 				F2750A6A2BE8479500A9C348 /* PresetView.swift in Sources */,
 				F25567692BA86200001DA145 /* AudioViewModel.swift in Sources */,

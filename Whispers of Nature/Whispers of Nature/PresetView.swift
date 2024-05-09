@@ -7,7 +7,6 @@ struct AudioPreset: Identifiable, Codable {
     var treeVolume: Float
     var fireVolume: Float
     
-    // Custom initializer to provide a default value for `id`
     init(id: UUID = UUID(), name: String, waveVolume: Float, treeVolume: Float, fireVolume: Float) {
         self.id = id
         self.name = name
@@ -16,7 +15,6 @@ struct AudioPreset: Identifiable, Codable {
         self.fireVolume = fireVolume
     }
 
-    // Coding keys to match the JSON keys
     enum CodingKeys: String, CodingKey {
         case id
         case name
@@ -25,7 +23,6 @@ struct AudioPreset: Identifiable, Codable {
         case fireVolume
     }
 
-    // Custom init from decoder to handle missing `id`
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decodeIfPresent(UUID.self, forKey: .id) ?? UUID()
@@ -34,8 +31,6 @@ struct AudioPreset: Identifiable, Codable {
         self.treeVolume = try container.decode(Float.self, forKey: .treeVolume)
         self.fireVolume = try container.decode(Float.self, forKey: .fireVolume)
     }
-
-    // Encode function is automatically synthesized
 }
 
 class PresetManager {
@@ -84,89 +79,134 @@ struct PresetsView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
-                List {
-                    ForEach(presets.indices, id: \.self) { index in
-                        HStack {
-                            Text(presets[index].name)
-                                .onTapGesture {
-                                    applyPreset(presets[index])
+            ZStack {
+                BackgroundView()
+                VStack {
+                    List {
+                        ForEach(presets.indices, id: \.self) { index in
+                            HStack {
+                                Text(presets[index].name)
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .padding(.leading, 10)
+                                    .onTapGesture {
+                                        applyPreset(presets[index])
+                                    }
+                                Spacer()
+                                HStack(spacing: 10) {
+                                    Button(action: {
+                                        editingPresetId = presets[index].id
+                                        newPresetName = presets[index].name
+                                        showingEditPresetSheet = true
+                                    }) {
+                                        Image(systemName: "pencil")
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .background(Color.green.opacity(0.7))
+                                            .clipShape(Circle())
+                                    }
+                                    .buttonStyle(BorderlessButtonStyle())
+
+                                    Button(action: {
+                                        presetToDelete = presets[index]
+                                        showAlertType = .delete
+                                    }) {
+                                        Image(systemName: "trash")
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .background(Color.red.opacity(0.7))
+                                            .clipShape(Circle())
+                                    }
+                                    .buttonStyle(BorderlessButtonStyle())
                                 }
-                            Spacer()
-                            Button("Edit") {
-                                editingPresetId = presets[index].id
-                                newPresetName = presets[index].name
-                                showingEditPresetSheet = true
                             }
-                            .buttonStyle(BorderlessButtonStyle()) // Ensures the button doesn't capture unwanted touches
-                            Spacer().frame(width: 10) // Add some space between buttons
-                            Button("Delete") {
-                                presetToDelete = presets[index]
-                                showAlertType = .delete
-                            }
-                            .buttonStyle(BorderlessButtonStyle()) // Ensures the button doesn't capture unwanted touches
+                            .padding(.vertical, 10)
+                            .background(Color.black.opacity(0.5))
+                            .cornerRadius(10)
+                        }
+                        .listRowBackground(Color.clear)
+                        
+                        Button(action: {
+                            showingNewPresetSheet = true
+                            newPresetName = "" // Reset the name field for new entry
+                        }) {
+                            Text("Add New Preset")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.green.opacity(0.8))
+                                .cornerRadius(10)
+                        }
+                        .padding(.top)
+                        
+                        Button(action: {
+                            showingScanner = true
+                        }) {
+                            Text("Scan QR Code")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.green.opacity(0.8))
+                                .cornerRadius(10)
                         }
                     }
-                    Button("Add New Preset") {
-                        showingNewPresetSheet = true
-                        newPresetName = "" // Reset the name field for new entry
+                    .listStyle(PlainListStyle())
+                    .navigationBarTitle("Presets", displayMode: .inline)
+                    .onAppear {
+                        presets = PresetManager.shared.loadPresets()
                     }
-                    Button("Scan QR Code") {
-                        showingScanner = true
+                    .sheet(isPresented: $showingNewPresetSheet) {
+                        NewPresetView(newPresetName: $newPresetName, onSave: {
+                            addNewPreset(named: newPresetName)
+                            showingNewPresetSheet = false
+                        }, onCancel: {
+                            showingNewPresetSheet = false
+                        })
                     }
-                }
-                .navigationBarTitle("Presets", displayMode: .inline)
-                .onAppear {
-                    presets = PresetManager.shared.loadPresets()
-                }
-                .sheet(isPresented: $showingNewPresetSheet) {
-                    NewPresetView(newPresetName: $newPresetName, onSave: {
-                        addNewPreset(named: newPresetName)
-                        showingNewPresetSheet = false
-                    }, onCancel: {
-                        showingNewPresetSheet = false
-                    })
-                }
-                .sheet(isPresented: $showingEditPresetSheet) {
-                    EditPresetView(presetName: $newPresetName, onSave: {
-                        if let index = presets.firstIndex(where: { $0.id == editingPresetId }) {
-                            presets[index].name = newPresetName
-                            PresetManager.shared.savePresets(presets)
-                        }
-                        showingEditPresetSheet = false
-                    }, onCancel: {
-                        showingEditPresetSheet = false
-                    })
-                }
-                .sheet(isPresented: $showingScanner) {
-                    QRCodeScannerView(didFindCode: { code in
-                        handleScannedCode(code)
-                        showingScanner = false
-                    }, didFail: { error in
-                        print("Scanning failed: \(error.localizedDescription)")
-                        showingScanner = false
-                    })
-                }
-                .alert(item: $showAlertType) { alertType in
-                    switch alertType {
-                    case .apply:
-                        return Alert(title: Text("Preset Applied"), message: Text("Applied \(appliedPresetName)"), dismissButton: .default(Text("OK")))
-                    case .delete:
-                        return Alert(
-                            title: Text("Delete Preset"),
-                            message: Text("Are you sure you want to delete this preset?"),
-                            primaryButton: .destructive(Text("Delete")) {
-                                if let preset = presetToDelete, let index = presets.firstIndex(where: { $0.id == preset.id }) {
-                                    deletePreset(at: index)
-                                }
-                                presetToDelete = nil
-                            },
-                            secondaryButton: .cancel {
-                                presetToDelete = nil
+                    .sheet(isPresented: $showingEditPresetSheet) {
+                        EditPresetView(presetName: $newPresetName, onSave: {
+                            if let index = presets.firstIndex(where: { $0.id == editingPresetId }) {
+                                presets[index].name = newPresetName
+                                PresetManager.shared.savePresets(presets)
                             }
-                        )
+                            showingEditPresetSheet = false
+                        }, onCancel: {
+                            showingEditPresetSheet = false
+                        })
+                    }
+                    .sheet(isPresented: $showingScanner) {
+                        QRCodeScannerView(didFindCode: { code in
+                            handleScannedCode(code)
+                            showingScanner = false
+                        }, didFail: { error in
+                            print("Scanning failed: \(error.localizedDescription)")
+                            showingScanner = false
+                        })
+                    }
+                    .alert(item: $showAlertType) { alertType in
+                        switch alertType {
+                        case .apply:
+                            return Alert(title: Text("Preset Applied"), message: Text("Applied \(appliedPresetName)"), dismissButton: .default(Text("OK")))
+                        case .delete:
+                            return Alert(
+                                title: Text("Delete Preset"),
+                                message: Text("Are you sure you want to delete this preset?"),
+                                primaryButton: .destructive(Text("Delete")) {
+                                    if let preset = presetToDelete, let index = presets.firstIndex(where: { $0.id == preset.id }) {
+                                        deletePreset(at: index)
+                                    }
+                                    presetToDelete = nil
+                                },
+                                secondaryButton: .cancel {
+                                    presetToDelete = nil
+                                }
+                            )
+                        }
                     }
                 }
+                .padding()
             }
         }
     }
