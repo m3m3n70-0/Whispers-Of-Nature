@@ -8,8 +8,8 @@ struct ContentView: View {
             ZStack {
                 BackgroundView()
                 ScrollView {
-                    VStack(spacing: 30) {
-                        Spacer().frame(height: 20)
+                    VStack(spacing: 20) {  // Adjusted spacing from 30 to 20
+                        Spacer().frame(height: 10)  // Adjusted height from 20 to 10
                         
                         playButton
                         
@@ -20,7 +20,6 @@ struct ContentView: View {
                         Spacer()
                     }
                     .padding()
-                    .navigationBarTitle("Whispers of Nature", displayMode: .large)
                     .navigationBarItems(trailing: profileButton)
                 }
             }
@@ -47,15 +46,12 @@ struct ContentView: View {
                     .fontWeight(.semibold)
                     .font(.title2)
             }
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(audioVM.isAudioPlaying ? Color.red : Color.green)
-            .foregroundColor(.white)
-            .cornerRadius(15)
-            .shadow(color: .gray.opacity(0.4), radius: 5, x: 0, y: 5)
-            .scaleEffect(audioVM.isAudioPlaying ? 1.05 : 1.0)
-            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: audioVM.isAudioPlaying)
         }
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(audioVM.isAudioPlaying ? Color.red : Color.green)
+        .foregroundColor(.white)
+        .cornerRadius(15)
         .padding(.horizontal)
     }
     
@@ -66,9 +62,10 @@ struct ContentView: View {
             volumeControl(sound: "Fire", volume: $audioVM.fireVolume, color: .orange)
         }
         .padding()
-        .background(Color(.systemGray6).opacity(0.8))
+        .background(Color.white.opacity(0.1)) // Make background transparent
         .cornerRadius(15)
-        .shadow(color: .gray.opacity(0.3), radius: 5, x: 0, y: 5)
+        .shadow(color: Color.black.opacity(0.8), radius: 10, x: 0, y: 5)
+        .padding(.horizontal)
     }
     
     @ViewBuilder
@@ -89,9 +86,6 @@ struct ContentView: View {
                 .padding(.horizontal)
         }
         .padding()
-        .background(Color(.systemGray6).opacity(0.7))
-        .cornerRadius(10)
-        .shadow(color: .gray.opacity(0.2), radius: 3, x: 0, y: 3)
     }
     
     private var navigationGrid: some View {
@@ -113,7 +107,7 @@ struct ContentView: View {
                     .padding()
                     .background(color)
                     .clipShape(Circle())
-                    .shadow(color: .gray.opacity(0.3), radius: 5, x: 0, y: 5)
+                    .shadow(color: .clear, radius: 5, x: 0, y: 5)
             }
         }
     }
@@ -127,4 +121,14 @@ struct ContentView: View {
             }
         }
     }
+}
+
+struct BlurView: UIViewRepresentable {
+    var style: UIBlurEffect.Style
+
+    func makeUIView(context: Context) -> UIVisualEffectView {
+        return UIVisualEffectView(effect: UIBlurEffect(style: style))
+    }
+
+    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {}
 }

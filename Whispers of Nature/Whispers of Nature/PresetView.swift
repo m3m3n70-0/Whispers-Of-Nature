@@ -81,133 +81,156 @@ struct PresetsView: View {
         NavigationView {
             ZStack {
                 BackgroundView()
-                VStack {
-                    List {
+                VStack(spacing: 20) {
+                    Spacer().frame(height: 20)
+                    
+                    ScrollView {
                         ForEach(presets.indices, id: \.self) { index in
-                            HStack {
-                                Text(presets[index].name)
-                                    .font(.headline)
-                                    .foregroundColor(.white)
-                                    .padding(.leading, 10)
-                                    .onTapGesture {
-                                        applyPreset(presets[index])
-                                    }
-                                Spacer()
-                                HStack(spacing: 10) {
-                                    Button(action: {
-                                        editingPresetId = presets[index].id
-                                        newPresetName = presets[index].name
-                                        showingEditPresetSheet = true
-                                    }) {
-                                        Image(systemName: "pencil")
-                                            .foregroundColor(.white)
-                                            .padding()
-                                            .background(Color.green.opacity(0.7))
-                                            .clipShape(Circle())
-                                    }
-                                    .buttonStyle(BorderlessButtonStyle())
+                            Button(action: {
+                                applyPreset(presets[index])
+                            }) {
+                                HStack {
+                                    Text(presets[index].name)
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+                                        .padding(.leading, 10)
+                                    Spacer()
+                                    HStack(spacing: 10) {
+                                        Button(action: {
+                                            editingPresetId = presets[index].id
+                                            newPresetName = presets[index].name
+                                            showingEditPresetSheet = true
+                                        }) {
+                                            Image(systemName: "pencil.circle.fill")
+                                                .resizable()
+                                                .frame(width: 24, height: 24)
+                                                .foregroundColor(.white)
+                                        }
+                                        .buttonStyle(BorderlessButtonStyle())
 
-                                    Button(action: {
-                                        presetToDelete = presets[index]
-                                        showAlertType = .delete
-                                    }) {
-                                        Image(systemName: "trash")
-                                            .foregroundColor(.white)
-                                            .padding()
-                                            .background(Color.red.opacity(0.7))
-                                            .clipShape(Circle())
+                                        Button(action: {
+                                            presetToDelete = presets[index]
+                                            showAlertType = .delete
+                                        }) {
+                                            Image(systemName: "trash.circle.fill")
+                                                .resizable()
+                                                .frame(width: 24, height: 24)
+                                                .foregroundColor(.white)
+                                        }
+                                        .buttonStyle(BorderlessButtonStyle())
                                     }
-                                    .buttonStyle(BorderlessButtonStyle())
                                 }
-                            }
-                            .padding(.vertical, 10)
-                            .background(Color.black.opacity(0.5))
-                            .cornerRadius(10)
-                        }
-                        .listRowBackground(Color.clear)
-                        
-                        Button(action: {
-                            showingNewPresetSheet = true
-                            newPresetName = "" // Reset the name field for new entry
-                        }) {
-                            Text("Add New Preset")
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
                                 .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(Color.green.opacity(0.8))
+                                .background(Color.black.opacity(0.5))
                                 .cornerRadius(10)
-                        }
-                        .padding(.top)
-                        
-                        Button(action: {
-                            showingScanner = true
-                        }) {
-                            Text("Scan QR Code")
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(Color.green.opacity(0.8))
-                                .cornerRadius(10)
-                        }
-                    }
-                    .listStyle(PlainListStyle())
-                    .navigationBarTitle("Presets", displayMode: .inline)
-                    .onAppear {
-                        presets = PresetManager.shared.loadPresets()
-                    }
-                    .sheet(isPresented: $showingNewPresetSheet) {
-                        NewPresetView(newPresetName: $newPresetName, onSave: {
-                            addNewPreset(named: newPresetName)
-                            showingNewPresetSheet = false
-                        }, onCancel: {
-                            showingNewPresetSheet = false
-                        })
-                    }
-                    .sheet(isPresented: $showingEditPresetSheet) {
-                        EditPresetView(presetName: $newPresetName, onSave: {
-                            if let index = presets.firstIndex(where: { $0.id == editingPresetId }) {
-                                presets[index].name = newPresetName
-                                PresetManager.shared.savePresets(presets)
                             }
-                            showingEditPresetSheet = false
-                        }, onCancel: {
-                            showingEditPresetSheet = false
-                        })
-                    }
-                    .sheet(isPresented: $showingScanner) {
-                        QRCodeScannerView(didFindCode: { code in
-                            handleScannedCode(code)
-                            showingScanner = false
-                        }, didFail: { error in
-                            print("Scanning failed: \(error.localizedDescription)")
-                            showingScanner = false
-                        })
-                    }
-                    .alert(item: $showAlertType) { alertType in
-                        switch alertType {
-                        case .apply:
-                            return Alert(title: Text("Preset Applied"), message: Text("Applied \(appliedPresetName)"), dismissButton: .default(Text("OK")))
-                        case .delete:
-                            return Alert(
-                                title: Text("Delete Preset"),
-                                message: Text("Are you sure you want to delete this preset?"),
-                                primaryButton: .destructive(Text("Delete")) {
-                                    if let preset = presetToDelete, let index = presets.firstIndex(where: { $0.id == preset.id }) {
-                                        deletePreset(at: index)
-                                    }
-                                    presetToDelete = nil
-                                },
-                                secondaryButton: .cancel {
-                                    presetToDelete = nil
-                                }
-                            )
+                            .buttonStyle(PlainButtonStyle()) // Ensures the entire HStack is tappable
                         }
                     }
+                    .frame(maxHeight: 300) // Adjust the height as needed
+
+                    addPresetButton
+                    scanQRCodeButton
+                    
+                    Spacer()
                 }
                 .padding()
+                .navigationBarTitle("Presets", displayMode: .large)
+                .navigationBarItems(trailing: profileButton)
+                .onAppear {
+                    presets = PresetManager.shared.loadPresets()
+                }
+                .sheet(isPresented: $showingNewPresetSheet) {
+                    NewPresetView(newPresetName: $newPresetName, onSave: {
+                        addNewPreset(named: newPresetName)
+                        showingNewPresetSheet = false
+                    }, onCancel: {
+                        showingNewPresetSheet = false
+                    })
+                }
+                .sheet(isPresented: $showingEditPresetSheet) {
+                    EditPresetView(presetName: $newPresetName, onSave: {
+                        if let index = presets.firstIndex(where: { $0.id == editingPresetId }) {
+                            presets[index].name = newPresetName
+                            PresetManager.shared.savePresets(presets)
+                        }
+                        showingEditPresetSheet = false
+                    }, onCancel: {
+                        showingEditPresetSheet = false
+                    })
+                }
+                .alert(item: $showAlertType) { alertType in
+                    switch alertType {
+                    case .apply:
+                        return Alert(title: Text("Preset Applied"), message: Text("Applied \(appliedPresetName)"), dismissButton: .default(Text("OK")))
+                    case .delete:
+                        return Alert(
+                            title: Text("Delete Preset"),
+                            message: Text("Are you sure you want to delete this preset?"),
+                            primaryButton: .destructive(Text("Delete")) {
+                                if let preset = presetToDelete, let index = presets.firstIndex(where: { $0.id == preset.id }) {
+                                    deletePreset(at: index)
+                                }
+                                presetToDelete = nil
+                            },
+                            secondaryButton: .cancel {
+                                presetToDelete = nil
+                            }
+                        )
+                    }
+                }
             }
+        }
+    }
+
+    private var profileButton: some View {
+        Button(action: {
+            // Action for profile button
+        }) {
+            Image(systemName: "person.crop.circle")
+                .resizable()
+                .frame(width: 32, height: 32)
+                .foregroundColor(.white)
+        }
+    }
+
+    private var addPresetButton: some View {
+        Button(action: {
+            showingNewPresetSheet = true
+            newPresetName = "" // Reset the name field for new entry
+        }) {
+            HStack {
+                Image(systemName: "plus.circle.fill")
+                    .font(.title2)
+                Text("Add New Preset")
+                    .fontWeight(.bold)
+                    .font(.title2)
+            }
+            .foregroundColor(.white)
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(Color.green.opacity(0.8))
+            .cornerRadius(10)
+        }
+        .padding(.top)
+    }
+
+    private var scanQRCodeButton: some View {
+        Button(action: {
+            showingScanner = true
+        }) {
+            HStack {
+                Image(systemName: "qrcode.viewfinder")
+                    .font(.title2)
+                Text("Scan QR Code")
+                    .fontWeight(.bold)
+                    .font(.title2)
+            }
+            .foregroundColor(.white)
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(Color.green.opacity(0.8))
+            .cornerRadius(10)
         }
     }
 
@@ -249,6 +272,7 @@ struct PresetsView: View {
         }
     }
 }
+
 
 struct NewPresetView: View {
     @Binding var newPresetName: String
