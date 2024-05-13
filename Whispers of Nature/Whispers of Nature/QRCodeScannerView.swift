@@ -20,10 +20,15 @@ struct QRCodeScannerView: UIViewControllerRepresentable {
                 parent.didFindCode(stringValue)
             }
         }
+
+        @objc func handleBackButton() {
+            parent.presentationMode.wrappedValue.dismiss()
+        }
     }
 
     var didFindCode: (String) -> Void
     var didFail: (Error) -> Void
+    @Environment(\.presentationMode) var presentationMode
 
     func makeCoordinator() -> Coordinator {
         let captureSession = AVCaptureSession()
@@ -67,6 +72,33 @@ struct QRCodeScannerView: UIViewControllerRepresentable {
         previewLayer.frame = viewController.view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
         viewController.view.layer.addSublayer(previewLayer)
+
+        // Add a back button with an arrow
+        let backButton = UIButton(type: .system)
+        backButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        backButton.tintColor = .white
+        backButton.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        backButton.layer.cornerRadius = 5
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        backButton.addTarget(context.coordinator, action: #selector(Coordinator.handleBackButton), for: .touchUpInside)
+
+        let backButtonContainer = UIView()
+        backButtonContainer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        backButtonContainer.translatesAutoresizingMaskIntoConstraints = false
+        viewController.view.addSubview(backButtonContainer)
+        backButtonContainer.addSubview(backButton)
+
+        NSLayoutConstraint.activate([
+            backButtonContainer.topAnchor.constraint(equalTo: viewController.view.safeAreaLayoutGuide.topAnchor),
+            backButtonContainer.leadingAnchor.constraint(equalTo: viewController.view.leadingAnchor),
+            backButtonContainer.trailingAnchor.constraint(equalTo: viewController.view.trailingAnchor),
+            backButtonContainer.heightAnchor.constraint(equalToConstant: 50),
+
+            backButton.centerXAnchor.constraint(equalTo: backButtonContainer.centerXAnchor),
+            backButton.centerYAnchor.constraint(equalTo: backButtonContainer.centerYAnchor),
+            backButton.widthAnchor.constraint(equalToConstant: 44),
+            backButton.heightAnchor.constraint(equalToConstant: 44)
+        ])
 
         captureSession.startRunning()
         return viewController

@@ -179,6 +179,9 @@ struct PresetsView: View {
                         )
                     }
                 }
+                .fullScreenCover(isPresented: $showingScanner) {
+                    QRCodeScannerView(didFindCode: handleScannedCode, didFail: handleScanError)
+                }
             }
         }
     }
@@ -270,6 +273,11 @@ struct PresetsView: View {
         } else {
             print("Failed to convert code to data")
         }
+    }
+
+    private func handleScanError(_ error: Error) {
+        print("Failed to scan QR code: \(error.localizedDescription)")
+        showingScanner = false
     }
 }
 
